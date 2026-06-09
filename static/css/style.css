@@ -1,0 +1,40 @@
+body{
+    margin:0;
+    font-family:Arial;
+}
+
+nav{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+
+    display:flex;
+    justify-content:space-between;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+}
+
+nav li{
+    margin-left:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+}
+
+.hero{
+    background:#111827;
+    color:white;
+
+    text-align:center;
+
+    padding:150px 20px;
+}
+
+button{
+    padding:12px 25px;
+}

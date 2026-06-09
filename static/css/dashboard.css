@@ -1,0 +1,37 @@
+body{
+    margin:0;
+    font-family:Arial;
+    display:flex;
+    background:#0b0f19;
+    color:white;
+}
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:#111827;
+    padding:20px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    padding:15px 0;
+}
+
+.main{
+    flex:1;
+    padding:30px;
+}
+
+.card{
+    background:#1e293b;
+
+    padding:20px;
+
+    margin-top:20px;
+
+    border-radius:10px;
+}
