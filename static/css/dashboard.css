@@ -1,9 +1,14 @@
-body{
+*{
     margin:0;
-    font-family:Arial;
-    display:flex;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     background:#0b0f19;
     color:white;
+    font-family:Arial,sans-serif;
+    display:flex;
 }
 
 .sidebar{
@@ -13,25 +18,137 @@ body{
     padding:20px;
 }
 
+.sidebar h2{
+    margin-bottom:30px;
+}
+
 .sidebar ul{
     list-style:none;
 }
 
 .sidebar li{
-    padding:15px 0;
+    padding:15px;
+    margin-bottom:10px;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+.sidebar li:hover{
+    background:#1e293b;
+}
+
+.active{
+    background:#2563eb;
 }
 
 .main{
     flex:1;
-    padding:30px;
+    padding:25px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.live{
+    background:#16a34a;
+    padding:8px 15px;
+    border-radius:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
 }
 
 .card{
     background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    transition:0.3s;
+}
 
-    padding:20px;
+.card:hover{
+    transform:translateY(-5px);
+}
 
+.card p{
+    font-size:30px;
+    margin-top:10px;
+}
+
+.chart-box{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.chart-placeholder{
+    height:200px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:2px dashed #475569;
     margin-top:20px;
+}
 
+.content-grid{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.panel{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+.chat-panel{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #334155;
+    padding:12px;
+    text-align:left;
+}
+
+.message{
+    background:#2563eb;
+    padding:15px;
     border-radius:10px;
+    margin-top:20px;
+}
+
+.reply{
+    background:#111827;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+@media(max-width:1000px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
 }

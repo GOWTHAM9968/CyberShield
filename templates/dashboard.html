@@ -1,39 +1,136 @@
 <!DOCTYPE html>
-<html>
-    <h1>Welcome to CyberShield</h1>
+<html lang="en">
 <head>
-    
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Dashboard</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
+
 <body>
 
 <div class="sidebar">
-    <h2>CyberShield</h2>
+
+    <h2>🛡 CyberShield</h2>
 
     <ul>
-        <li>Dashboard</li>
+        <li class="active">Dashboard</li>
         <li>Risk Assessment</li>
         <li>Incidents</li>
         <li>Reports</li>
+        <li>AI Assistant</li>
+        <li>Settings</li>
+        <li>Logout</li>
     </ul>
+
 </div>
 
 <div class="main">
 
-    <h1>Security Dashboard</h1>
+    <div class="topbar">
 
-    <div class="card">
-        Security Score: 87/100
+        <h1>Security Dashboard</h1>
+
+        <span class="live">
+            LIVE MONITORING
+        </span>
+
     </div>
 
-    <div class="card">
-        Active Threats: 12
+    <div class="cards">
+
+        <div class="card">
+            <h3>Security Score</h3>
+            <p>87 / 100</p>
+        </div>
+
+        <div class="card">
+            <h3>Active Threats</h3>
+            <p>12</p>
+        </div>
+
+        <div class="card">
+            <h3>Incidents</h3>
+            <p>4</p>
+        </div>
+
+        <div class="card">
+            <h3>Protected Devices</h3>
+            <p>28</p>
+        </div>
+
     </div>
 
-    <div class="card">
-        Incidents: 4
+    <div class="chart-box">
+
+        <h2>Threat Trend Analysis</h2>
+
+        <div class="chart-placeholder">
+            Chart will be added in Day 5
+        </div>
+
+    </div>
+
+    <div class="content-grid">
+
+        <div class="panel">
+
+            <h2>Threat Analytics</h2>
+
+            <table>
+
+                <tr>
+                    <th>Threat</th>
+                    <th>Severity</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Phishing Attack</td>
+                    <td>High</td>
+                    <td>Active</td>
+                </tr>
+
+                <tr>
+                    <td>Malware</td>
+                    <td>Medium</td>
+                    <td>Resolved</td>
+                </tr>
+
+                <tr>
+                    <td>Data Leak</td>
+                    <td>Critical</td>
+                    <td>Active</td>
+                </tr>
+
+                <tr>
+                    <td>Weak Password</td>
+                    <td>Low</td>
+                    <td>Resolved</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="chat-panel">
+
+            <h2>AI Security Assistant</h2>
+
+            <div class="message">
+                How can I improve my security?
+            </div>
+
+            <div class="reply">
+                Enable MFA, use strong passwords,
+                update software regularly,
+                and avoid suspicious links.
+            </div>
+
+        </div>
+
     </div>
 
 </div>
