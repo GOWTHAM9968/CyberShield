@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = "cybershield_secret_key"
+
 
 @app.route("/")
 def home():
@@ -10,10 +12,14 @@ def home():
 
 @app.route("/dashboard")
 def dashboard():
+
+    if "user" not in session:
+        return redirect("/login")
+
     return render_template("dashboard.html")
 
 
-@app.route("/register", methods=["GET","POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
 
     if request.method == "POST":
@@ -26,8 +32,8 @@ def register():
         cursor = conn.cursor()
 
         cursor.execute(
-        "INSERT INTO users(username,email,password) VALUES(?,?,?)",
-        (username,email,password)
+            "INSERT INTO users(username,email,password) VALUES(?,?,?)",
+            (username, email, password)
         )
 
         conn.commit()
@@ -38,7 +44,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/login", methods=["GET","POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
@@ -50,8 +56,8 @@ def login():
         cursor = conn.cursor()
 
         cursor.execute(
-        "SELECT * FROM users WHERE email=? AND password=?",
-        (email,password)
+            "SELECT * FROM users WHERE email=? AND password=?",
+            (email, password)
         )
 
         user = cursor.fetchone()
@@ -59,9 +65,37 @@ def login():
         conn.close()
 
         if user:
+
+            session["user"] = user[1]
+
             return redirect("/dashboard")
 
+        return "Invalid Email or Password"
+
     return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+
+    session.pop("user", None)
+
+    return redirect("/")
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/services")
+def services():
+    return render_template("services.html")
+
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 
 if __name__ == "__main__":
