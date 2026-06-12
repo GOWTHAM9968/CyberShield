@@ -50,3 +50,22 @@ th,td{
     border:1px solid white;
     padding:10px;
 }
+.reply{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+a{
+    color:#60a5fa;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+textarea{
+    min-height:120px;
+}

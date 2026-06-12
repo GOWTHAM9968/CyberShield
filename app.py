@@ -17,7 +17,19 @@ def dashboard():
     if "user" not in session:
         return redirect("/login")
 
-    return render_template("dashboard.html")
+    conn = sqlite3.connect("cybershield.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM incidents")
+    total_incidents = cursor.fetchone()[0]
+
+    conn.close()
+
+    return render_template(
+        "dashboard.html",
+        username=session["user"],
+        total_incidents=total_incidents
+    )
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -126,11 +138,13 @@ def report():
 @app.route("/reports")
 def reports():
 
+    if "user" not in session:
+        return redirect("/login")
+
     conn = sqlite3.connect("cybershield.db")
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM incidents")
-
     incidents = cursor.fetchall()
 
     conn.close()
@@ -138,6 +152,42 @@ def reports():
     return render_template(
         "reports.html",
         incidents=incidents
+    )
+
+
+@app.route("/assistant", methods=["GET", "POST"])
+def assistant():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    answer = ""
+
+    if request.method == "POST":
+
+        question = request.form["question"].lower()
+
+        if "password" in question:
+            answer = "Use strong passwords and enable MFA."
+
+        elif "phishing" in question:
+            answer = "Verify sender identity before clicking links."
+
+        elif "malware" in question:
+            answer = "Use antivirus and keep software updated."
+
+        elif "ransomware" in question:
+            answer = "Maintain backups and avoid unknown downloads."
+
+        elif "wifi" in question:
+            answer = "Use WPA2/WPA3 encryption and strong passwords."
+
+        else:
+            answer = "Follow cybersecurity best practices."
+
+    return render_template(
+        "assistant.html",
+        answer=answer
     )
 
 

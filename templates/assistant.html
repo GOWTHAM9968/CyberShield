@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CyberShield AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body>
+
+<div class="box">
+
+    <h1>🤖 CyberShield AI Assistant</h1>
+
+    <form method="POST">
+
+        <input
+        type="text"
+        name="question"
+        placeholder="Ask about cybersecurity..."
+        required>
+
+        <button type="submit">
+            Ask AI
+        </button>
+
+    </form>
+
+    <br>
+
+    <h3>Response</h3>
+
+    <div class="reply">
+        {{ answer }}
+    </div>
+
+    <br>
+
+    <a href="/dashboard">
+        Back To Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

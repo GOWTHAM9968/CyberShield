@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Report Incident</title>
 
 <link rel="stylesheet"
 href="{{ url_for('static', filename='css/auth.css') }}">
+
 </head>
 
 <body>
 
 <div class="box">
 
-<h1>Report Incident</h1>
+<h1>🚨 Report Incident</h1>
 
 <form method="POST">
 
@@ -32,7 +34,8 @@ required>
 
 <textarea
 name="description"
-placeholder="Incident Description">
+placeholder="Describe the incident..."
+required>
 </textarea>
 
 <button type="submit">

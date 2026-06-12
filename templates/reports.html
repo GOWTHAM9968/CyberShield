@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Security Reports</title>
+
+<title>CyberShield Reports</title>
 
 <link rel="stylesheet"
 href="{{ url_for('static', filename='css/auth.css') }}">
+
 </head>
 
 <body>
@@ -16,22 +18,30 @@ href="{{ url_for('static', filename='css/auth.css') }}">
 <table>
 
 <tr>
-<th>ID</th>
-<th>Incident</th>
-<th>Severity</th>
+    <th>ID</th>
+    <th>Incident</th>
+    <th>Severity</th>
+    <th>Description</th>
 </tr>
 
 {% for incident in incidents %}
 
 <tr>
-<td>{{ incident[0] }}</td>
-<td>{{ incident[1] }}</td>
-<td>{{ incident[2] }}</td>
+    <td>{{ incident[0] }}</td>
+    <td>{{ incident[1] }}</td>
+    <td>{{ incident[2] }}</td>
+    <td>{{ incident[3] }}</td>
 </tr>
 
 {% endfor %}
 
 </table>
+
+<br>
+
+<a href="/dashboard">
+Dashboard
+</a>
 
 </div>
 

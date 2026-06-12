@@ -8,7 +8,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT,
-    email TEXT,
+    email TEXT UNIQUE,
     password TEXT
 )
 """)
@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS incidents(
 conn.commit()
 conn.close()
 
-print("Database Ready")
+print("CyberShield Database Ready")

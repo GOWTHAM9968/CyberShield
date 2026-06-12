@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,133 +8,194 @@
 
     <link rel="stylesheet"
     href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-<div class="sidebar">
+<div class="container">
 
-    <h2>🛡 CyberShield</h2>
+    <!-- Sidebar -->
 
-    <ul>
-        <li class="active">Dashboard</li>
-        <li>Risk Assessment</li>
-        <li>Incidents</li>
-        <li>Reports</li>
-        <li>AI Assistant</li>
-        <li>Settings</li>
-        <li>Logout</li>
-    </ul>
+    <div class="sidebar">
 
-</div>
+        <h2>🛡 CyberShield</h2>
 
-<div class="main">
+        <ul>
 
-    <div class="topbar">
+            <li><a href="/dashboard">Dashboard</a></li>
 
-        <h1>Security Dashboard</h1>
+            <li><a href="/report">Report Incident</a></li>
 
-        <span class="live">
-            LIVE MONITORING
-        </span>
+            <li><a href="/reports">Reports</a></li>
+
+            <li><a href="/assistant">AI Assistant</a></li>
+
+            <li><a href="/logout">Logout</a></li>
+
+        </ul>
 
     </div>
 
-    <div class="cards">
+    <!-- Main Content -->
 
-        <div class="card">
-            <h3>Security Score</h3>
-            <p>87 / 100</p>
+    <div class="main-content">
+
+        <div class="header">
+
+            <h1>Cyber Security Dashboard</h1>
+
+            <p>Welcome, {{ username }}</p>
+
         </div>
 
-        <div class="card">
-            <h3>Active Threats</h3>
-            <p>12</p>
+        <!-- Cards -->
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Security Score</h3>
+                <h2>92%</h2>
+            </div>
+
+            <div class="card">
+                <h3>Total Incidents</h3>
+                <h2>{{ total_incidents }}</h2>
+            </div>
+
+            <div class="card">
+                <h3>Active Threats</h3>
+                <h2>7</h2>
+            </div>
+
+            <div class="card">
+                <h3>Protected Devices</h3>
+                <h2>24</h2>
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>Incidents</h3>
-            <p>4</p>
-        </div>
+        <!-- Chart -->
 
-        <div class="card">
-            <h3>Protected Devices</h3>
-            <p>28</p>
-        </div>
-
-    </div>
-
-    <div class="chart-box">
-
-        <h2>Threat Trend Analysis</h2>
-
-        <div class="chart-placeholder">
-            Chart will be added in Day 5
-        </div>
-
-    </div>
-
-    <div class="content-grid">
-
-        <div class="panel">
+        <div class="chart-container">
 
             <h2>Threat Analytics</h2>
+
+            <canvas id="threatChart"></canvas>
+
+        </div>
+
+        <!-- Threat Table -->
+
+        <div class="table-container">
+
+            <h2>Recent Threat Activity</h2>
 
             <table>
 
                 <tr>
+                    <th>ID</th>
                     <th>Threat</th>
                     <th>Severity</th>
                     <th>Status</th>
                 </tr>
 
                 <tr>
-                    <td>Phishing Attack</td>
+                    <td>001</td>
+                    <td>Phishing Attempt</td>
                     <td>High</td>
-                    <td>Active</td>
+                    <td>Blocked</td>
                 </tr>
 
                 <tr>
-                    <td>Malware</td>
-                    <td>Medium</td>
-                    <td>Resolved</td>
-                </tr>
-
-                <tr>
-                    <td>Data Leak</td>
+                    <td>002</td>
+                    <td>Malware Detection</td>
                     <td>Critical</td>
-                    <td>Active</td>
+                    <td>Resolved</td>
                 </tr>
 
                 <tr>
-                    <td>Weak Password</td>
-                    <td>Low</td>
-                    <td>Resolved</td>
+                    <td>003</td>
+                    <td>Suspicious Login</td>
+                    <td>Medium</td>
+                    <td>Investigating</td>
+                </tr>
+
+                <tr>
+                    <td>004</td>
+                    <td>Brute Force Attack</td>
+                    <td>High</td>
+                    <td>Blocked</td>
                 </tr>
 
             </table>
 
         </div>
 
-        <div class="chat-panel">
+        <!-- AI Assistant -->
 
-            <h2>AI Security Assistant</h2>
+        <div class="ai-box">
 
-            <div class="message">
-                How can I improve my security?
-            </div>
+            <h2>🤖 CyberShield AI Assistant</h2>
 
-            <div class="reply">
-                Enable MFA, use strong passwords,
-                update software regularly,
-                and avoid suspicious links.
-            </div>
+            <p>
+                Ask cybersecurity questions, view reports,
+                and receive security recommendations.
+            </p>
+
+            <a href="/assistant">
+                <button>Open AI Assistant</button>
+            </a>
 
         </div>
 
     </div>
 
 </div>
+
+<script>
+
+const ctx = document.getElementById('threatChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat',
+            'Sun'
+        ],
+
+        datasets: [{
+
+            label: 'Detected Threats',
+
+            data: [
+                5,
+                8,
+                4,
+                10,
+                7,
+                12,
+                6
+            ],
+
+            borderWidth: 3
+
+        }]
+    }
+
+});
+
+</script>
 
 </body>
 </html>

@@ -152,3 +152,40 @@ th,td{
         grid-template-columns:1fr;
     }
 }
+.container{
+    display:flex;
+    width:100%;
+}
+
+.main-content{
+    flex:1;
+    padding:25px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.chart-container{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.table-container{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.ai-box{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
