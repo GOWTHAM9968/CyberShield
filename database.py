@@ -13,7 +13,16 @@ CREATE TABLE IF NOT EXISTS users(
 )
 """)
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS incidents(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    incident_name TEXT,
+    severity TEXT,
+    description TEXT
+)
+""")
+
 conn.commit()
 conn.close()
 
-print("Database Created Successfully")
+print("Database Ready")

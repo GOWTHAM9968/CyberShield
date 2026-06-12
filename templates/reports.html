@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Security Reports</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Security Reports</h1>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Incident</th>
+<th>Severity</th>
+</tr>
+
+{% for incident in incidents %}
+
+<tr>
+<td>{{ incident[0] }}</td>
+<td>{{ incident[1] }}</td>
+<td>{{ incident[2] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
