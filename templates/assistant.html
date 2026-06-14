@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CyberShield AI Assistant</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <title>AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/assistant.css') }}">
 </head>
 <body>
 
-<div class="box">
+<div class="container">
 
     <h1>🤖 CyberShield AI Assistant</h1>
 
-    <form method="POST">
+    <div class="chat">
 
-        <input
-        type="text"
-        name="question"
-        placeholder="Ask about cybersecurity..."
-        required>
+        <div class="user">
+            How can I improve my security?
+        </div>
 
-        <button type="submit">
-            Ask AI
-        </button>
+        <div class="bot">
+            Enable MFA, update software, use strong passwords and avoid phishing links.
+        </div>
 
-    </form>
-
-    <br>
-
-    <h3>Response</h3>
-
-    <div class="reply">
-        {{ answer }}
     </div>
-
-    <br>
-
-    <a href="/dashboard">
-        Back To Dashboard
-    </a>
 
 </div>
 
