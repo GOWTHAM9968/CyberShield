@@ -1,46 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CyberShield Dashboard</title>
 
     <link rel="stylesheet"
     href="{{ url_for('static', filename='css/dashboard.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- Sidebar -->
-
     <div class="sidebar">
 
         <h2>🛡 CyberShield</h2>
 
         <ul>
-            <li><a href="/risk">Risk Assessment</a></li>
-            <li><a href="/assistant">AI Assistant</a></li>
 
-            <li><a href="/dashboard">Dashboard</a></li>
+            <li class="active">
+                <a href="/dashboard">Dashboard</a>
+            </li>
 
-            <li><a href="/report">Report Incident</a></li>
+            <li>
+                <a href="/risk">Risk Assessment</a>
+            </li>
 
-            <li><a href="/reports">Reports</a></li>
+            <li>
+                <a href="/report">Report Incident</a>
+            </li>
 
-            <li><a href="/assistant">AI Assistant</a></li>
+            <li>
+                <a href="/reports">Reports</a>
+            </li>
 
-            <li><a href="/logout">Logout</a></li>
+            <li>
+                <a href="/assistant">AI Assistant</a>
+            </li>
+
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
 
         </ul>
 
     </div>
-
-    <!-- Main Content -->
 
     <div class="main-content">
 
@@ -52,33 +60,29 @@
 
         </div>
 
-        <!-- Cards -->
-
         <div class="cards">
 
             <div class="card">
                 <h3>Security Score</h3>
-                <h2>92%</h2>
+                <h1>92%</h1>
             </div>
 
             <div class="card">
                 <h3>Total Incidents</h3>
-                <h2>{{ total_incidents }}</h2>
+                <h1>{{ total_incidents }}</h1>
             </div>
 
             <div class="card">
                 <h3>Active Threats</h3>
-                <h2>7</h2>
+                <h1>7</h1>
             </div>
 
             <div class="card">
                 <h3>Protected Devices</h3>
-                <h2>24</h2>
+                <h1>24</h1>
             </div>
 
         </div>
-
-        <!-- Chart -->
 
         <div class="chart-container">
 
@@ -87,8 +91,6 @@
             <canvas id="threatChart"></canvas>
 
         </div>
-
-        <!-- Threat Table -->
 
         <div class="table-container">
 
@@ -105,50 +107,33 @@
 
                 <tr>
                     <td>001</td>
-                    <td>Phishing Attempt</td>
+                    <td>Phishing Attack</td>
                     <td>High</td>
                     <td>Blocked</td>
                 </tr>
 
                 <tr>
                     <td>002</td>
-                    <td>Malware Detection</td>
+                    <td>Malware</td>
                     <td>Critical</td>
                     <td>Resolved</td>
                 </tr>
 
                 <tr>
                     <td>003</td>
-                    <td>Suspicious Login</td>
+                    <td>Data Leak</td>
                     <td>Medium</td>
                     <td>Investigating</td>
                 </tr>
 
                 <tr>
                     <td>004</td>
-                    <td>Brute Force Attack</td>
+                    <td>Brute Force</td>
                     <td>High</td>
                     <td>Blocked</td>
                 </tr>
 
             </table>
-
-        </div>
-
-        <!-- AI Assistant -->
-
-        <div class="ai-box">
-
-            <h2>🤖 CyberShield AI Assistant</h2>
-
-            <p>
-                Ask cybersecurity questions, view reports,
-                and receive security recommendations.
-            </p>
-
-            <a href="/assistant">
-                <button>Open AI Assistant</button>
-            </a>
 
         </div>
 
@@ -162,38 +147,36 @@ const ctx = document.getElementById('threatChart');
 
 new Chart(ctx, {
 
-    type: 'line',
+type: 'line',
 
-    data: {
+data: {
 
-        labels: [
-            'Mon',
-            'Tue',
-            'Wed',
-            'Thu',
-            'Fri',
-            'Sat',
-            'Sun'
-        ],
+labels: [
+'Mon',
+'Tue',
+'Wed',
+'Thu',
+'Fri',
+'Sat',
+'Sun'
+],
 
-        datasets: [{
+datasets: [{
 
-            label: 'Detected Threats',
+label: 'Threats',
 
-            data: [
-                5,
-                8,
-                4,
-                10,
-                7,
-                12,
-                6
-            ],
+data: [4,8,5,11,7,13,6],
 
-            borderWidth: 3
+borderColor: '#3b82f6',
 
-        }]
-    }
+backgroundColor: 'rgba(59,130,246,0.2)',
+
+fill:true,
+
+tension:0.4
+
+}]
+}
 
 });
 
