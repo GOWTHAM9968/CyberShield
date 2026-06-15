@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
 
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberShield Dashboard</title>
 
-    <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/dashboard.css') }}">
+```
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/dashboard.css') }}">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+```
 
 </head>
 
@@ -16,128 +19,152 @@
 
 <div class="container">
 
-    <div class="sidebar">
+```
+<div class="sidebar">
 
-        <h2>🛡 CyberShield</h2>
+    <h2>🛡 CyberShield</h2>
 
-        <ul>
+    <ul>
 
-            <li class="active">
-                <a href="/dashboard">Dashboard</a>
-            </li>
+        <li class="active">
+            <a href="/dashboard">Dashboard</a>
+        </li>
 
-            <li>
-                <a href="/risk">Risk Assessment</a>
-            </li>
+        <li>
+            <a href="/risk">Risk Assessment</a>
+        </li>
 
-            <li>
-                <a href="/report">Report Incident</a>
-            </li>
+        <li>
+            <a href="/report">Report Incident</a>
+        </li>
 
-            <li>
-                <a href="/reports">Reports</a>
-            </li>
+        <li>
+            <a href="/reports">Reports</a>
+        </li>
 
-            <li>
-                <a href="/assistant">AI Assistant</a>
-            </li>
+        <li>
+            <a href="/assistant">AI Assistant</a>
+        </li>
 
-            <li>
-                <a href="/logout">Logout</a>
-            </li>
+        <li>
+            <a href="/logout">Logout</a>
+        </li>
 
-        </ul>
+    </ul>
 
-    </div>
+</div>
 
-    <div class="main-content">
+<div class="main-content">
 
-        <div class="header">
+    <div class="header">
 
+        <div>
             <h1>Cyber Security Dashboard</h1>
-
             <p>Welcome, {{ username }}</p>
-
         </div>
 
-        <div class="cards">
-
-            <div class="card">
-                <h3>Security Score</h3>
-                <h1>92%</h1>
-            </div>
-
-            <div class="card">
-                <h3>Total Incidents</h3>
-                <h1>{{ total_incidents }}</h1>
-            </div>
-
-            <div class="card">
-                <h3>Active Threats</h3>
-                <h1>7</h1>
-            </div>
-
-            <div class="card">
-                <h3>Protected Devices</h3>
-                <h1>24</h1>
-            </div>
-
-        </div>
-
-        <div class="chart-container">
-
-            <h2>Threat Analytics</h2>
-
-            <canvas id="threatChart"></canvas>
-
-        </div>
-
-        <div class="table-container">
-
-            <h2>Recent Threat Activity</h2>
-
-            <table>
-
-                <tr>
-                    <th>ID</th>
-                    <th>Threat</th>
-                    <th>Severity</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td>001</td>
-                    <td>Phishing Attack</td>
-                    <td>High</td>
-                    <td>Blocked</td>
-                </tr>
-
-                <tr>
-                    <td>002</td>
-                    <td>Malware</td>
-                    <td>Critical</td>
-                    <td>Resolved</td>
-                </tr>
-
-                <tr>
-                    <td>003</td>
-                    <td>Data Leak</td>
-                    <td>Medium</td>
-                    <td>Investigating</td>
-                </tr>
-
-                <tr>
-                    <td>004</td>
-                    <td>Brute Force</td>
-                    <td>High</td>
-                    <td>Blocked</td>
-                </tr>
-
-            </table>
-
+        <div class="live">
+            LIVE MONITORING
         </div>
 
     </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Security Score</h3>
+            <p>92%</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Incidents</h3>
+            <p>{{ total_incidents }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Active Threats</h3>
+            <p>7</p>
+        </div>
+
+        <div class="card">
+            <h3>Protected Devices</h3>
+            <p>24</p>
+        </div>
+
+    </div>
+
+    <div class="chart-container">
+
+        <h2>Threat Analytics</h2>
+
+        <canvas id="threatChart"></canvas>
+
+    </div>
+
+    <div class="table-container">
+
+        <h2>Recent Threat Activity</h2>
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Threat</th>
+                <th>Severity</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>001</td>
+                <td>Phishing Attack</td>
+                <td>High</td>
+                <td>Blocked</td>
+            </tr>
+
+            <tr>
+                <td>002</td>
+                <td>Malware Detection</td>
+                <td>Critical</td>
+                <td>Resolved</td>
+            </tr>
+
+            <tr>
+                <td>003</td>
+                <td>Suspicious Login</td>
+                <td>Medium</td>
+                <td>Investigating</td>
+            </tr>
+
+            <tr>
+                <td>004</td>
+                <td>Brute Force Attack</td>
+                <td>High</td>
+                <td>Blocked</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="ai-box">
+
+        <h2>🤖 CyberShield AI Assistant</h2>
+
+        <p>
+            Ask cybersecurity questions, view reports,
+            and receive security recommendations.
+        </p>
+
+        <br>
+
+        <a href="/assistant">
+            <button>Open AI Assistant</button>
+        </a>
+
+    </div>
+
+</div>
+```
 
 </div>
 
@@ -147,36 +174,38 @@ const ctx = document.getElementById('threatChart');
 
 new Chart(ctx, {
 
-type: 'line',
+    type: 'line',
 
-data: {
+    data: {
 
-labels: [
-'Mon',
-'Tue',
-'Wed',
-'Thu',
-'Fri',
-'Sat',
-'Sun'
-],
+        labels: [
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat',
+            'Sun'
+        ],
 
-datasets: [{
+        datasets: [{
 
-label: 'Threats',
+            label: 'Detected Threats',
 
-data: [4,8,5,11,7,13,6],
+            data: [5, 8, 4, 10, 7, 12, 6],
 
-borderColor: '#3b82f6',
+            borderColor: '#2563eb',
 
-backgroundColor: 'rgba(59,130,246,0.2)',
+            backgroundColor: 'rgba(37,99,235,0.2)',
 
-fill:true,
+            fill: true,
 
-tension:0.4
+            tension: 0.4,
 
-}]
-}
+            borderWidth: 3
+
+        }]
+    }
 
 });
 

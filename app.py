@@ -11,6 +11,8 @@ def home():
     return render_template("index.html")
 
 
+# ================= DASHBOARD =================
+
 @app.route("/dashboard")
 def dashboard():
 
@@ -20,8 +22,11 @@ def dashboard():
     conn = sqlite3.connect("cybershield.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT COUNT(*) FROM incidents")
-    total_incidents = cursor.fetchone()[0]
+    try:
+        cursor.execute("SELECT COUNT(*) FROM incidents")
+        total_incidents = cursor.fetchone()[0]
+    except:
+        total_incidents = 0
 
     conn.close()
 
@@ -31,6 +36,8 @@ def dashboard():
         total_incidents=total_incidents
     )
 
+
+# ================= REGISTER =================
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -64,6 +71,8 @@ def register():
     return render_template("register.html")
 
 
+# ================= LOGIN =================
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -95,6 +104,8 @@ def login():
     return render_template("login.html")
 
 
+# ================= LOGOUT =================
+
 @app.route("/logout")
 def logout():
 
@@ -102,6 +113,8 @@ def logout():
 
     return redirect("/")
 
+
+# ================= REPORT INCIDENT =================
 
 @app.route("/report", methods=["GET", "POST"])
 def report():
@@ -135,6 +148,8 @@ def report():
     return render_template("report_incident.html")
 
 
+# ================= REPORTS =================
+
 @app.route("/reports")
 def reports():
 
@@ -144,8 +159,11 @@ def reports():
     conn = sqlite3.connect("cybershield.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM incidents")
-    incidents = cursor.fetchall()
+    try:
+        cursor.execute("SELECT * FROM incidents")
+        incidents = cursor.fetchall()
+    except:
+        incidents = []
 
     conn.close()
 
@@ -154,6 +172,8 @@ def reports():
         incidents=incidents
     )
 
+
+# ================= AI ASSISTANT =================
 
 @app.route("/assistant", methods=["GET", "POST"])
 def assistant():
@@ -190,6 +210,19 @@ def assistant():
         answer=answer
     )
 
+
+# ================= RISK ASSESSMENT =================
+
+@app.route("/risk")
+def risk():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    return render_template("risk.html")
+
+
+# ================= RUN APP =================
 
 if __name__ == "__main__":
     app.run(debug=True)
