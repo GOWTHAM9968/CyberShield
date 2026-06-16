@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, send_file
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+from reportlab.pdfgen import canvas
+import os
 
 app = Flask(__name__)
 app.secret_key = "cybershield_secret_key"
