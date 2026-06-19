@@ -217,27 +217,28 @@ http://127.0.0.1:5000
 
 ---
 
-## 👨‍💻 Developer
+## ⭐ Project Support
 
-**Gowtham**
+If you found CyberShield helpful, please consider starring the repository on GitHub.
 
-GitHub: [GOWTHAM9968 GitHub](https://github.com/GOWTHAM9968?utm_source=chatgpt.com)
+This project demonstrates practical skills in:
 
-LinkedIn: [Gowtham LinkedIn](https://www.linkedin.com/in/mr-gowtham-573628372/?utm_source=chatgpt.com)
+- Python Development
+- Flask Web Applications
+- Cybersecurity Fundamentals
+- Incident Management
+- Authentication Systems
+- Database Integration
+- PDF Report Generation
 
----
+Feedback, suggestions, and contributions are always welcome.
 
-## ⭐ Project Status
+### Developer
 
-✅ Day 1–11 Completed
-✅ Authentication System
-✅ Incident Management
-✅ Dashboard Analytics
-✅ AI Assistant
-✅ Risk Assessment
-✅ PDF Report Generator
-🔄 Future Enhancements In Progress
+Gowtham
 
----
+GitHub: https://github.com/GOWTHAM9968
 
-### If you like this project, give it a ⭐ on GitHub and follow for future cybersecurity projects. 🛡️🚀
+LinkedIn: https://www.linkedin.com/in/mr-gowtham-573628372/
+
+🛡️ Building Secure Digital Solutions Through Continuous Learning.
