@@ -158,11 +158,25 @@ def reports():
     if "user" not in session:
         return redirect("/login")
 
+    search = request.args.get("search", "")
+    severity = request.args.get("severity", "")
+
     conn = sqlite3.connect("cybershield.db")
     cursor = conn.cursor()
 
+    query = "SELECT * FROM incidents WHERE 1=1"
+    params = []
+
+    if search:
+        query += " AND incident_name LIKE ?"
+        params.append(f"%{search}%")
+
+    if severity:
+        query += " AND severity=?"
+        params.append(severity)
+
     try:
-        cursor.execute("SELECT * FROM incidents")
+        cursor.execute(query, params)
         incidents = cursor.fetchall()
     except:
         incidents = []
