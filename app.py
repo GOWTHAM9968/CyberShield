@@ -180,6 +180,7 @@ def reports():
         incidents = cursor.fetchall()
     except:
         incidents = []
+        
 
     conn.close()
 
@@ -242,3 +243,124 @@ def risk():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
+# ================= ADMIN DASHBOARD =================
+
+@app.route("/admin")
+def admin():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("cybershield.db")
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("SELECT COUNT(*) FROM users")
+        total_users = cursor.fetchone()[0]
+    except:
+        total_users = 0
+
+    try:
+        cursor.execute("SELECT COUNT(*) FROM incidents")
+        total_incidents = cursor.fetchone()[0]
+    except:
+        total_incidents = 0
+
+    try:
+        cursor.execute(
+            "SELECT COUNT(*) FROM incidents WHERE severity='Critical'"
+        )
+        critical_incidents = cursor.fetchone()[0]
+    except:
+        critical_incidents = 0
+
+    conn.close()
+
+    return render_template(
+        "admin.html",
+        username=session["user"],
+        total_users=total_users,
+        total_incidents=total_incidents,
+        critical_incidents=critical_incidents
+    )# ================= USERS =================
+
+@app.route("/users")
+def users():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("cybershield.db")
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute(
+            "SELECT id,username,email FROM users"
+        )
+
+        users = cursor.fetchall()
+
+    except:
+
+        users = []
+
+    conn.close()
+
+    return render_template(
+        "users.html",
+        users=users
+    )# ================= DELETE INCIDENT =================
+
+@app.route("/delete_incident/<int:id>")
+def delete_incident(id):
+
+    if "user" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("cybershield.db")
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute(
+            "DELETE FROM incidents WHERE id=?",
+            (id,)
+        )
+
+        conn.commit()
+
+    except:
+
+        pass
+
+    conn.close()
+
+    return redirect("/reports")
+# ================= DELETE USER =================
+
+@app.route("/delete_user/<int:id>")
+def delete_user(id):
+
+    if "user" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("cybershield.db")
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute(
+            "DELETE FROM users WHERE id=?",
+            (id,)
+        )
+
+        conn.commit()
+
+    except:
+
+        pass
+
+    conn.close()
+
+    return redirect("/users")
