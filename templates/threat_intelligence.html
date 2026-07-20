@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Threat Intelligence | CyberShield</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2><i class="bi bi-shield-lock-fill"></i> CyberShield</h2>
+
+        <ul>
+
+            <li><a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+
+            <li><a href="/report"><i class="bi bi-bug-fill"></i> Report Incident</a></li>
+
+            <li><a href="/reports"><i class="bi bi-table"></i> Reports</a></li>
+
+            <li><a href="/assistant"><i class="bi bi-robot"></i> AI Assistant</a></li>
+
+            <li class="active"><a href="/threat_intelligence"><i class="bi bi-globe"></i> Threat Intelligence</a></li>
+
+            <li><a href="/ip_lookup"><i class="bi bi-search"></i> IP Lookup</a></li>
+
+            <li><a href="/url_scan"><i class="bi bi-link-45deg"></i> URL Scan</a></li>
+
+            <li><a href="/hash_check"><i class="bi bi-fingerprint"></i> Hash Check</a></li>
+
+            <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main -->
+
+    <div class="main-content">
+
+        <div class="header">
+
+            <div>
+
+                <h1>Threat Intelligence Center</h1>
+
+                <p>Latest cyber attacks from around the world</p>
+
+            </div>
+
+            <div class="live">
+
+                🟢 LIVE
+
+            </div>
+
+        </div>
+
+        <!-- Summary Cards -->
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Critical Threats</h3>
+                <h1>28</h1>
+            </div>
+
+            <div class="card">
+                <h3>Malware Families</h3>
+                <h1>135</h1>
+            </div>
+
+            <div class="card">
+                <h3>APT Groups</h3>
+                <h1>18</h1>
+            </div>
+
+            <div class="card">
+                <h3>Blocked Domains</h3>
+                <h1>12,640</h1>
+            </div>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="chart-container">
+
+            <h2>Threat Search</h2>
+
+            <form method="POST">
+
+                <input
+                type="text"
+                name="ioc"
+                placeholder="Search CVE, Malware, Domain, IP..."
+                style="width:75%;padding:12px;border-radius:8px;border:none;">
+
+                <button
+                style="padding:12px 20px;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;">
+                Search
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Latest Threat Feed -->
+
+        <div class="table-container">
+
+            <h2>Latest Global Threat Feed</h2>
+
+            <table>
+
+                <tr>
+                    <th>Time</th>
+                    <th>Threat</th>
+                    <th>Category</th>
+                    <th>Severity</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>10:20</td>
+                    <td>LockBit Ransomware</td>
+                    <td>Ransomware</td>
+                    <td style="color:red;">Critical</td>
+                    <td>Active</td>
+                </tr>
+
+                <tr>
+                    <td>10:35</td>
+                    <td>Phishing Campaign</td>
+                    <td>Email</td>
+                    <td style="color:orange;">High</td>
+                    <td>Investigating</td>
+                </tr>
+
+                <tr>
+                    <td>11:05</td>
+                    <td>Mirai Botnet</td>
+                    <td>Botnet</td>
+                    <td style="color:red;">Critical</td>
+                    <td>Blocked</td>
+                </tr>
+
+                <tr>
+                    <td>11:40</td>
+                    <td>SQL Injection</td>
+                    <td>Web Attack</td>
+                    <td style="color:yellow;">Medium</td>
+                    <td>Resolved</td>
+                </tr>
+
+                <tr>
+                    <td>12:15</td>
+                    <td>XSS Attempt</td>
+                    <td>Web Attack</td>
+                    <td style="color:orange;">High</td>
+                    <td>Blocked</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- MITRE -->
+
+        <div class="chart-container">
+
+            <h2>MITRE ATT&CK Techniques</h2>
+
+            <table>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Technique</th>
+
+                    <th>Tactic</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>T1566</td>
+
+                    <td>Phishing</td>
+
+                    <td>Initial Access</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>T1059</td>
+
+                    <td>Command Execution</td>
+
+                    <td>Execution</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>T1078</td>
+
+                    <td>Valid Accounts</td>
+
+                    <td>Persistence</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>T1041</td>
+
+                    <td>Exfiltration</td>
+
+                    <td>Data Theft</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- AI -->
+
+        <div class="ai-box">
+
+            <h2>🤖 AI Threat Recommendation</h2>
+
+            <p>
+
+                Monitor ransomware campaigns, update endpoint protection,
+                patch vulnerable services immediately, enable MFA, and
+                continuously monitor suspicious outbound traffic.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

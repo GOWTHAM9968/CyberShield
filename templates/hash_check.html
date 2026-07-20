@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hash Checker | CyberShield</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<h2><i class="bi bi-shield-lock-fill"></i> CyberShield</h2>
+
+<ul>
+
+<li><a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+
+<li><a href="/report"><i class="bi bi-bug-fill"></i> Report Incident</a></li>
+
+<li><a href="/reports"><i class="bi bi-table"></i> Reports</a></li>
+
+<li><a href="/assistant"><i class="bi bi-robot"></i> AI Assistant</a></li>
+
+<li><a href="/threat_intelligence"><i class="bi bi-globe"></i> Threat Intelligence</a></li>
+
+<li><a href="/ip_lookup"><i class="bi bi-search"></i> IP Lookup</a></li>
+
+<li><a href="/url_scan"><i class="bi bi-link-45deg"></i> URL Scanner</a></li>
+
+<li class="active"><a href="/hash_check"><i class="bi bi-fingerprint"></i> Hash Checker</a></li>
+
+<li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+
+</ul>
+
+</div>
+
+<!-- Main -->
+
+<div class="main-content">
+
+<div class="header">
+
+<div>
+
+<h1>Malware Hash Checker</h1>
+
+<p>Search MD5, SHA1 and SHA256 hashes</p>
+
+</div>
+
+<div class="live">
+
+🟢 DATABASE ONLINE
+
+</div>
+
+</div>
+
+<!-- Search -->
+
+<div class="chart-container">
+
+<h2>Search File Hash</h2>
+
+<form method="POST">
+
+<input
+type="text"
+name="hash"
+placeholder="Paste MD5 / SHA1 / SHA256"
+style="width:75%;padding:12px;border:none;border-radius:8px;">
+
+<button
+style="padding:12px 25px;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;">
+
+Search
+
+</button>
+
+</form>
+
+</div>
+
+<!-- Cards -->
+
+<div class="cards">
+
+<div class="card">
+<h3>Detection</h3>
+<h2 style="color:#16a34a;">Clean</h2>
+</div>
+
+<div class="card">
+<h3>Detection Rate</h3>
+<h2>0 / 72</h2>
+</div>
+
+<div class="card">
+<h3>Hash Type</h3>
+<h2>SHA256</h2>
+</div>
+
+<div class="card">
+<h3>Risk Score</h3>
+<h2>2%</h2>
+</div>
+
+</div>
+
+<!-- Results -->
+
+<div class="table-container">
+
+<h2>Hash Information</h2>
+
+<table>
+
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+
+<tr>
+<td>Hash</td>
+<td>{{ hash_value or "e3b0c44298fc1c149afbf4c8996fb924..." }}</td>
+</tr>
+
+<tr>
+<td>Hash Type</td>
+<td>SHA256</td>
+</tr>
+
+<tr>
+<td>First Seen</td>
+<td>2026-07-15</td>
+</tr>
+
+<tr>
+<td>Last Analysis</td>
+<td>2026-07-20</td>
+</tr>
+
+<tr>
+<td>Malicious</td>
+<td style="color:#16a34a;">0 Engines</td>
+</tr>
+
+<tr>
+<td>Suspicious</td>
+<td>0 Engines</td>
+</tr>
+
+<tr>
+<td>Harmless</td>
+<td>72 Engines</td>
+</tr>
+
+<tr>
+<td>Undetected</td>
+<td>0 Engines</td>
+</tr>
+
+<tr>
+<td>Threat Name</td>
+<td>None</td>
+</tr>
+
+<tr>
+<td>Recommendation</td>
+<td>Safe File</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- Engine Results -->
+
+<div class="table-container">
+
+<h2>Security Engine Results</h2>
+
+<table>
+
+<tr>
+<th>Engine</th>
+<th>Result</th>
+</tr>
+
+<tr>
+<td>Microsoft Defender</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+<tr>
+<td>Kaspersky</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+<tr>
+<td>Bitdefender</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+<tr>
+<td>ESET</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+<tr>
+<td>Avast</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+<tr>
+<td>Malwarebytes</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+<tr>
+<td>Trend Micro</td>
+<td style="color:#16a34a;">Clean</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- AI -->
+
+<div class="ai-box">
+
+<h2>🤖 AI Analysis</h2>
+
+<p>
+
+This hash is not currently associated with known malware.
+No antivirus engines flagged the file. Continue following
+security best practices and verify files from trusted
+sources before execution.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
