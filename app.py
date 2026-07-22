@@ -11,6 +11,10 @@ app.secret_key = "cybershield_secret_key"
 @app.route("/")
 def home():
     return render_template("index.html")
+@app.route("/malware_scan", methods=["GET", "POST"])
+@app.route("/scan_result/<int:id>")
+@app.route("/malware_history")
+@app.route("/download_scan_report/<int:id>")
 
 
 # ================= DASHBOARD =================

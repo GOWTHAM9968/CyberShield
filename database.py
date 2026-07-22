@@ -22,6 +22,21 @@ CREATE TABLE IF NOT EXISTS incidents(
 """)
 
 conn.commit()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS evidence(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    filename TEXT,
+    md5 TEXT,
+    sha1 TEXT,
+    sha256 TEXT,
+    filesize TEXT,
+    uploaded_by TEXT,
+    upload_time TEXT
+)
+""")
+
+conn.commit()
 conn.close()
 
 print("Database Created Successfully")
