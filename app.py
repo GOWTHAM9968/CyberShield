@@ -3,6 +3,7 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 from reportlab.pdfgen import canvas
 import os
+from network.scanner import scan_network
 
 app = Flask(__name__)
 app.secret_key = "cybershield_secret_key"
@@ -248,12 +249,25 @@ def threat_intelligence():
         return redirect("/login")
 
     return render_template("threat_intelligence.html")
+@app.route("/network_scan", methods=["GET","POST"])
+def network_scan():
 
+    if "user" not in session:
+        return redirect("/login")
 
-# ================= RUN APP =================
+    devices=[]
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    if request.method=="POST":
+
+        target=request.form["target"]
+
+        devices=scan_network(target)
+
+    return render_template(
+        "network_scan.html",
+        devices=devices
+    )
+
     
 # ================= ADMIN DASHBOARD =================
 
@@ -434,3 +448,5 @@ def url_scan():
         return redirect("/login")
 
     return render_template("url_scan.html")
+if __name__ == "__main__":
+    app.run(debug=True)
