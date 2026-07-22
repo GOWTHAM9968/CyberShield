@@ -237,6 +237,13 @@ def risk():
         return redirect("/login")
 
     return render_template("risk.html")
+@app.route("/threat_intelligence")
+def threat_intelligence():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    return render_template("threat_intelligence.html")
 
 
 # ================= RUN APP =================
@@ -373,3 +380,53 @@ app.config["MAIL_USERNAME"] = "your_email@gmail.com"
 app.config["MAIL_PASSWORD"] = "your_app_password"
 
 mail = Mail(app)
+@app.route("/hash_check", methods=["GET","POST"])
+def hash_check():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    hash_value = ""
+
+    if request.method == "POST":
+        hash_value = request.form["hash"]
+
+    return render_template(
+        "hash_check.html",
+        hash_value=hash_value
+    )
+@app.route("/ip_lookup", methods=["GET","POST"])
+def ip_lookup():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    ip = ""
+    country = ""
+    isp = ""
+    risk = ""
+
+    if request.method == "POST":
+
+        ip = request.form["ip"]
+
+        # Dummy Data
+        country = "United States"
+        isp = "Google LLC"
+        risk = "Low"
+
+    return render_template(
+        "ip_lookup.html",
+        ip=ip,
+        country=country,
+        isp=isp,
+        risk=risk
+    )
+    
+@app.route("/url_scan", methods=["GET","POST"])
+def url_scan():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    return render_template("url_scan.html")
