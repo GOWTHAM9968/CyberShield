@@ -169,29 +169,16 @@ def reports():
     if "user" not in session:
         return redirect("/login")
 
-    search = request.args.get("search", "")
-    severity = request.args.get("severity", "")
-
     conn = sqlite3.connect("cybershield.db")
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    query = "SELECT * FROM incidents WHERE 1=1"
-    params = []
-
-    if search:
-        query += " AND incident_name LIKE ?"
-        params.append(f"%{search}%")
-
-    if severity:
-        query += " AND severity=?"
-        params.append(severity)
-
     try:
-        cursor.execute(query, params)
+        cursor.execute("SELECT * FROM incidents")
         incidents = cursor.fetchall()
-    except:
+    except Exception as e:
+        print(e)
         incidents = []
-        
 
     conn.close()
 
@@ -447,34 +434,21 @@ def ip_lookup():
         risk=risk
     )
     
-@app.route("/url_scan", methods=["GET","POST"])
+@app.route("/url_scan", methods=["GET", "POST"])
 def url_scan():
+    result = ""
 
-    if "user" not in session:
-        return redirect("/login")
+    if request.method == "POST":
+        url = request.form["url"]
 
-    return render_template("url_scan.html")@app.route("/siem")
-def siem():
+        if url.startswith("https://"):
+            result = "✅ Safe HTTPS URL"
+        elif url.startswith("http://"):
+            result = "⚠️ Insecure HTTP URL"
+        else:
+            result = "❌ Invalid URL"
 
-    if "user" not in session:
-        return redirect("/login")
-
-    logs=[]
-
-    try:
-
-        with open("logs/sample.log","r") as file:
-
-            logs=file.readlines()
-
-    except:
-
-        logs=[]
-
-    return render_template(
-        "siem_dashboard.html",
-        logs=logs
-    )
+    return render_template("url_scan.html", result=result)
 @app.route("/logs")
 def logs():
 
