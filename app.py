@@ -4,7 +4,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from reportlab.pdfgen import canvas
 import os
 from network.scanner import scan_network
-
+import os
+import sqlite3
+from datetime import datetime
 app = Flask(__name__)
 app.secret_key = "cybershield_secret_key"
 
@@ -15,6 +17,7 @@ def home():
 @app.route("/malware_scan", methods=["GET", "POST"])
 @app.route("/scan_result/<int:id>")
 @app.route("/malware_history")
+
 @app.route("/download_scan_report/<int:id>")
 
 
@@ -85,7 +88,7 @@ def login():
 
     if request.method == "POST":
 
-        email = request.form["email"]
+        email = request.form["email"].strip()
         password = request.form["password"]
 
         conn = sqlite3.connect("cybershield.db")
@@ -100,17 +103,20 @@ def login():
 
         conn.close()
 
+        print("User:", user)
+
+        if user:
+            print("Stored Hash:", user[3])
+            print("Password Match:", check_password_hash(user[3], password))
+
         if user and check_password_hash(user[3], password):
 
             session["user"] = user[1]
-
             return redirect("/dashboard")
 
         return "Invalid Email or Password"
 
     return render_template("login.html")
-
-
 # ================= LOGOUT =================
 
 @app.route("/logout")
@@ -447,6 +453,141 @@ def url_scan():
     if "user" not in session:
         return redirect("/login")
 
-    return render_template("url_scan.html")
+    return render_template("url_scan.html")@app.route("/siem")
+def siem():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    logs=[]
+
+    try:
+
+        with open("logs/sample.log","r") as file:
+
+            logs=file.readlines()
+
+    except:
+
+        logs=[]
+
+    return render_template(
+        "siem_dashboard.html",
+        logs=logs
+    )
+@app.route("/logs")
+def logs():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    logs=[]
+
+    try:
+
+        with open("logs/sample.log","r") as file:
+
+            logs=file.readlines()
+
+    except:
+
+        logs=[]
+
+    return render_template(
+        "log_viewer.html",
+        logs=logs
+    )
+@app.route("/upload_logs", methods=["GET","POST"])
+def upload_logs():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    if request.method=="POST":
+
+        file=request.files["logfile"]
+
+        if file:
+
+            path=os.path.join(
+                "logs",
+                file.filename
+            )
+
+            file.save(path)
+
+            return redirect("/logs")
+
+    return render_template("upload_logs.html")
+@app.route("/alerts")
+def alerts():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    alerts=[]
+
+    try:
+
+        with open("logs/sample.log") as file:
+
+            for line in file:
+
+                if "WARNING" in line or "CRITICAL" in line:
+
+                    alerts.append(line)
+
+    except:
+
+        pass
+
+    return render_template(
+        "alerts.html",
+        alerts=alerts
+    )
+@app.route("/download_log_report")
+def download_log_report():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    from reportlab.pdfgen import canvas
+
+    pdf="SIEM_Report.pdf"
+
+    c=canvas.Canvas(pdf)
+
+    c.drawString(50,800,"CyberShield SIEM Report")
+
+    y=760
+
+    try:
+
+        with open("logs/sample.log") as file:
+
+            for line in file:
+
+                c.drawString(50,y,line.strip())
+
+                y-=20
+
+                if y<50:
+
+                    c.showPage()
+
+                    y=800
+
+    except:
+
+        c.drawString(50,760,"No Logs Found")
+
+    c.save()
+
+    return send_file(
+        pdf,
+        as_attachment=True
+    )
+   
+
 if __name__ == "__main__":
     app.run(debug=True)

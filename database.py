@@ -21,8 +21,6 @@ CREATE TABLE IF NOT EXISTS incidents(
 )
 """)
 
-conn.commit()
-
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS evidence(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,6 +31,41 @@ CREATE TABLE IF NOT EXISTS evidence(
     filesize TEXT,
     uploaded_by TEXT,
     upload_time TEXT
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS malware_scans(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    filename TEXT,
+    md5 TEXT,
+    sha1 TEXT,
+    sha256 TEXT,
+    status TEXT,
+    scan_date TEXT
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS network_scans(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    target TEXT,
+    host TEXT,
+    ip TEXT,
+    status TEXT,
+    ports TEXT,
+    services TEXT,
+    scan_time TEXT
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS logs(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event TEXT,
+    severity TEXT,
+    source TEXT,
+    timestamp TEXT
 )
 """)
 
