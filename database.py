@@ -68,6 +68,15 @@ CREATE TABLE IF NOT EXISTS logs(
     timestamp TEXT
 )
 """)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS activity_logs(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    action TEXT,
+    ip_address TEXT,
+    timestamp TEXT
+)
+""")
 
 conn.commit()
 conn.close()
