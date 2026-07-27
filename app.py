@@ -1,3 +1,4 @@
+import email
 from flask import Flask, render_template, request, redirect, session, send_file
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -7,6 +8,10 @@ from network.scanner import scan_network
 import os
 import sqlite3
 from datetime import datetime
+from flask_mail import Mail, Message
+from flask import render_template
+
+
 app = Flask(__name__)
 app.secret_key = "cybershield_secret_key"
 
@@ -117,6 +122,7 @@ def login():
         return "Invalid Email or Password"
 
     return render_template("login.html")
+      
 # ================= LOGOUT =================
 
 @app.route("/logout")
@@ -144,22 +150,36 @@ def report():
         conn = sqlite3.connect("cybershield.db")
         cursor = conn.cursor()
 
-        cursor.execute(
-            """
+        cursor.execute("""
             INSERT INTO incidents
-            (incident_name,severity,description)
-            VALUES(?,?,?)
-            """,
             (incident_name, severity, description)
-        )
+            VALUES (?, ?, ?)
+        """, (incident_name, severity, description))
 
         conn.commit()
         conn.close()
 
+        # ===== Send Email =====
+
+        msg = Message(
+            subject="🚨 CyberShield Incident Alert",
+            recipients=["yourgmail@gmail.com"]   # Your Gmail
+        )
+
+        msg.html = render_template(
+            "emails/incident_alert.html",
+            incident=incident_name,
+            severity=severity,
+            description=description
+        )
+
+        mail.send(msg)
+
+        # ======================
+
         return redirect("/dashboard")
 
     return render_template("report_incident.html")
-
 
 # ================= REPORTS =================
 
@@ -561,7 +581,20 @@ def download_log_report():
         pdf,
         as_attachment=True
     )
-   
+app.config.from_pyfile("config.py")
+
+mail = Mail(app)  
+msg = Message(
+    "CyberShield Login Alert",
+    recipients=[email]
+)
+
+msg.html = render_template(
+    "emails/login_alert.html",
+    username=session["user"]
+)
+
+mail.send(msg) 
 
 if __name__ == "__main__":
     app.run(debug=True)
