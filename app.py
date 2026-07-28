@@ -1784,14 +1784,3 @@ add_log(
     severity,
     session["user"]
 )
-add_log(
-    f"Uploaded File : {filename}",
-    "Medium",
-    session["user"]
-)
-
-add_log(
-    f"Malware Scan : {filename}",
-    status,
-    session["user"]
-)
