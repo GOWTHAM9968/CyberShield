@@ -1656,3 +1656,142 @@ if __name__=="__main__":
     debug=True
 
     )
+
+# ================================
+# LIVE SIEM DASHBOARD
+# ================================
+
+@app.route("/siem")
+@login_required
+def siem_dashboard():
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Total Events
+    cursor.execute("SELECT COUNT(*) FROM logs")
+    total_events = cursor.fetchone()[0]
+
+    # Critical Events
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Critical'")
+    critical = cursor.fetchone()[0]
+
+    # High Events
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='High'")
+    high = cursor.fetchone()[0]
+
+    # Medium Events
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Medium'")
+    medium = cursor.fetchone()[0]
+
+    # Low Events
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Low'")
+    low = cursor.fetchone()[0]
+
+    # Latest Events
+    cursor.execute("""
+    SELECT *
+    FROM logs
+    ORDER BY id DESC
+    LIMIT 20
+    """)
+
+    events = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "siem_dashboard.html",
+        total_events=total_events,
+        critical=critical,
+        high=high,
+        medium=medium,
+        low=low,
+        events=events
+    )
+    
+@app.route("/api/siem_stats")
+@login_required
+def siem_stats():
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM logs")
+    total = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Critical'")
+    critical = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='High'")
+    high = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Medium'")
+    medium = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Low'")
+    low = cursor.fetchone()[0]
+
+    conn.close()
+
+    return {
+        "total": total,
+        "critical": critical,
+        "high": high,
+        "medium": medium,
+        "low": low
+    }
+    
+    
+def add_log(event, severity, source):
+    
+    conn = get_db_connection()
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO logs(
+        event,
+        severity,
+        source,
+        timestamp
+    )
+    VALUES(?,?,?,?)
+    """,(
+        event,
+        severity,
+        source,
+        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    ))
+
+    conn.commit()
+    conn.close()
+    
+add_log(
+    "User Login",
+    "Low",
+    session["user"]
+)
+
+add_log(
+    "User Logout",
+    "Low",
+    session["user"]
+)
+
+add_log(
+    f"Incident Reported : {incident_name}",
+    severity,
+    session["user"]
+)
+add_log(
+    f"Uploaded File : {filename}",
+    "Medium",
+    session["user"]
+)
+
+add_log(
+    f"Malware Scan : {filename}",
+    status,
+    session["user"]
+)
