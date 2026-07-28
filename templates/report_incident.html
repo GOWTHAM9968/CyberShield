@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Report Incident</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/auth.css') }}">
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>🚨 Report Incident</h1>
+
+<form method="POST">
+
+<input
+type="text"
+name="incident_name"
+placeholder="Incident Name"
+required>
+
+<select name="severity">
+
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+<option>Critical</option>
+
+</select>
+
+<textarea
+name="description"
+placeholder="Describe the incident..."
+required>
+</textarea>
+
+<button type="submit">
+Submit Incident
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
