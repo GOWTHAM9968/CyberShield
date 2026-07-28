@@ -1710,36 +1710,4 @@ def siem_dashboard():
         events=events
     )
     
-@app.route("/api/siem_stats")
-@login_required
-def siem_stats():
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT COUNT(*) FROM logs")
-    total = cursor.fetchone()[0]
-
-    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Critical'")
-    critical = cursor.fetchone()[0]
-
-    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='High'")
-    high = cursor.fetchone()[0]
-
-    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Medium'")
-    medium = cursor.fetchone()[0]
-
-    cursor.execute("SELECT COUNT(*) FROM logs WHERE severity='Low'")
-    low = cursor.fetchone()[0]
-
-    conn.close()
-
-    return {
-        "total": total,
-        "critical": critical,
-        "high": high,
-        "medium": medium,
-        "low": low
-    }
-    
     
